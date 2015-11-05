@@ -1,0 +1,7 @@
+dat <- read.table("R/power/mydat.txt", head=TRUE,sep=";",colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric"),na.strings="?")
+febdat<-subset(dat,Date=='1/2/2007' | Date == '2/2/2007')
+mydates <- paste(febdat$Date,febdat$Time)
+mydates2 <- strptime(mydates,"%d/%m/%Y %H:%M:%S")
+plot(mydates2,febdat$Global_active_power,type="l",xlab="",ylab="Global Active Power (kilowats)")
+dev.copy(png,"assgn2.png")
+dev.off()

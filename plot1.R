@@ -1,0 +1,6 @@
+dat <- read.table("R/power/mydat.txt", head=TRUE,sep=";",colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric"),na.strings="?")
+febdat<-subset(dat,Date=='1/2/2007' | Date == '2/2/2007')
+head(febdat)
+hist(febdat$Global_active_power,col="red",xlab="Global Active Power (kilowatts)")
+dev.copy(png,"assgn1.png")
+dev.off()

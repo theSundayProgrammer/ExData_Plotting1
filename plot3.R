@@ -1,0 +1,13 @@
+dat <- read.table("R/power/mydat.txt", head=TRUE,sep=";",colClasses=c("character","character","numeric","numeric","numeric","numeric","numeric","numeric"),na.strings="?")
+febdat<-subset(dat,Date=='1/2/2007' | Date == '2/2/2007')
+mydates <- paste(febdat$Date,febdat$Time)
+mydates2 <- strptime(mydates,"%d/%m/%Y %H:%M:%S")
+febdat$DateTime=mydates2
+with(febdat,plot(DateTime,Sub_metering_1,type="l",xlab="",ylab="Energy Sub metering"))
+par(new=TRUE)
+with(febdat,plot(DateTime,Sub_metering_2,type="l",xlab="",ylab="", col="red",ylim=c(min(Sub_metering_1),max(Sub_metering_1))))
+par(new=TRUE)
+with(febdat,plot(DateTime,Sub_metering_3,type="l",xlab="",ylab="", col="blue",ylim=c(min(Sub_metering_1),max(Sub_metering_1))))
+legend("topright", lty=c(1,1,1), col = c("black","blue", "red"), legend = c("Sub Metering 1","Sub Metering 2", "Sub Metering 3"))
+dev.copy(png,"assgn3.png")
+dev.off()
